@@ -1,0 +1,156 @@
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .row {
+            display: flex;
+            flex-direction: row;
+            width: 900px;
+        }
+
+        .big {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .c {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .q {
+            display: inline-block;
+            margin: 30px;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+            padding: 10px;
+        }
+
+        .fq {
+            display: inline-block;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            width: 400px;
+            height: 700px;
+            background-color: rgb(0, 255, 149);
+        }
+
+        .no-outline {
+            border-top-style: hidden;
+            border-right-style: hidden;
+            border-left-style: hidden;
+            border-bottom-style: groove;
+            background-color: #eee;
+        }
+
+        .no-outline:focus {
+            outline: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="big">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'base' %}">Quick Slope Mass Assessment</a>
+                    <div>
+                        <span class="navbar-brand">Hello {{request.user}}</span>
+                        <span><a class="navbar-brand" href="{% url 'logout' %}">logout</a></span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">{{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor%}
+        <h2>See the Required Results</h2>
+        <div class="c">
+            <div class="q">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <p>All Results </p>
+                    <input type="hidden" name="username" id="username" value="{{request.user}}" /><br>
+                    <br>
+                    <button type="submit" name="allresults" class="btn btn-success">See all the results</button>
+                </form>
+            </div>
+            <div class="q">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <p>To search </p>
+                    <input type="hidden" name="username" id="username" value="{{request.user}}" /><br>
+                    <br>
+                    <label for="samplename">Enter sample name</label><br>
+                    <input type="text" name="samplename" id="samplename" /><br>
+                    <br>
+                    <button type="submit" name="search" class="btn btn-success">Search</button>
+                </form>
+            </div>
+            <div class="q">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <p>To Delete </p>
+                    <input type="hidden" name="username" id="username" value="{{request.user}}" /><br>
+                    <br>
+                    <label for="samplename">sample name</label><br>
+                    <input type="text" name="samplename" id="samplename" /><br>
+                    <br>
+                    <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            <table class="table table-bordered border-primary">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Samplename</th>
+                        <th scope="col">Sampledesc</th>
+                        <th scope="col">Remarks</th>
+                        <th scope="col">SEE FULL REPORT</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for qs in qsmar%}
+                    <tr>
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <input type="hidden" name="username" value="{{request.user}}" />
+                            <td><input type="text" name="sn" class="no-outline" value="{{qs.Samplename}}" readonly />
+                            </td>
+                            <td>{{qs.Sampledesc}}</td>
+                            <td>{{qs.Qremarks}}</td>
+                            <td><button name="table" class="btn btn-success" type="submit">REPORT</button>
+                            </td>
+                        </form>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"> </script>
+    <script>
+        demo = () => {
+            let k = document.querySelector('#username')
+            console.log(k.value)
+        }
+    </script>
+</body>
+
+</html>
+{% endblock %}

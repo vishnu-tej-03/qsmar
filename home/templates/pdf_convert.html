@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample results</title>
+    <style>
+        @media print {
+
+            h1 {
+                margin: 0 auto;
+                color: blue;
+            }
+
+            table {
+                border: solid #000 !important;
+                border-width: 1px 0 0 1px !important;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            th,
+            td {
+                size: 2em;
+                padding: 2px;
+                border: solid #000 !important;
+                border-width: 0 1px 1px 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="al">
+        <h1>RESULT</h1>
+    </div>
+    {% for qs in qsmar%}
+    <table class="tab">
+        <tr>
+            <th scope="col">{{qs.Samplename}}</th>
+            <th scope="col">{{qs.Sampledesc}}</th>
+        </tr>
+        <tr>
+            <th scope="row">F1 :</th>
+            <td>{{qs.Value_F1}}</td>
+        </tr>
+        <tr>
+            <th scope="row">F2 :</th>
+            <td>{{qs.Value_F2}}</td>
+        </tr>
+        <tr>
+            <th scope="row">F3 :</th>
+            <td>{{qs.Value_F3}}</td>
+        </tr>
+        <tr>
+            <th scope="row">F4 :</th>
+            <td>{{qs.Value_F4}}</td>
+        </tr>
+        <tr>
+            <th scope="row">F5 :</th>
+            <td>{{qs.Value_F5}}</td>
+        </tr>
+        <tr>
+            <th scope="row">F6 :</th>
+            <td>{{qs.Value_F6}}</td>
+        </tr>
+        <tr>
+            <th scope="row">F7 :</th>
+            <td>{{qs.Value_F7}}</td>
+        </tr>
+        <tr>
+            <th scope="row">F8 :</th>
+            <td>{{qs.Value_F8}}</td>
+        </tr>
+        <tr>
+            <th scope="row">F9 :</th>
+            <td>{{qs.Value_F9}}</td>
+        </tr>
+        <tr>
+            <th scope="row">F10:</th>
+            <td>{{qs.Value_F10}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Remarks:</th>
+            <td>{{qs.Qremarks}}</td>
+        </tr>
+    </table>
+    {% endfor%}
+</body>
+
+</html>

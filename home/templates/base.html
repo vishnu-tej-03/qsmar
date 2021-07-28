@@ -1,0 +1,655 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .header {
+            margin-top: 20px;
+            width: 100%;
+            color: white;
+            height: 50px;
+        }
+
+        .big {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .que {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin: 30px;
+        }
+
+        .value_store {
+            width: 100px;
+            height: 100px;
+        }
+
+        .fq {
+            width: 1000px;
+            height: 650px;
+            margin: 10px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+            padding-left: 5px;
+
+        }
+
+        .c {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .k {
+            width: 1000px;
+            height: 100px;
+            margin-bottom: 10px;
+            padding-left: 5px;
+
+        }
+
+        .fk {
+            width: 1000px;
+            height: 1100px;
+            margin: 10px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+            padding-left: 5px;
+        }
+
+        .fm {
+            width: 1000px;
+            height: 380px;
+            margin: 10px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+            padding-left: 5px;
+
+        }
+
+        .f {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .x {
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            margin-left: 35px;
+        }
+
+        .site-footer {
+            margin-top: auto;
+            padding: 10px 10px 0px 10px;
+            bottom: 0;
+            width: 100%;
+            background: black;
+        }
+
+        .footernotes {
+            color: grey;
+        }
+
+        h2 {
+            color: blue;
+        }
+
+        h5 {
+            color: darkcyan;
+        }
+
+        .footer-links {
+            padding-left: 0;
+            list-style: none
+        }
+
+        .footer-links li {
+            display: block
+        }
+
+        .footer-links a {
+            color: grey;
+            text-decoration: none;
+
+        }
+
+        .footer-links a:focus,
+        .footer-links a:hover {
+            color: rgb(86, 252, 243);
+        }
+
+        .footer-links.inline li {
+            display: inline-block
+        }
+
+        #grp_name {
+            color: grey;
+            text-decoration: none;
+        }
+
+        #grp_name:hover {
+            color: rgb(86, 252, 243);
+        }
+
+        @media (max-width: 1059px) {
+            .fq {
+                width: 400px;
+                height: 750px;
+            }
+
+            .fm {
+                width: 400px;
+                height: 525px;
+            }
+        }
+
+        @media (max-width: 590px) {
+            .fq {
+                width: 400px;
+                height: 1100px;
+            }
+
+            .fk {
+                width: 400px;
+                height: 1240px;
+            }
+
+            .fm {
+                width: 400px;
+                height: 620px;
+            }
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<body>
+    <div class="big">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Quick Slope Mass Assessment</a>
+                    <div>
+                        <a class="navbar-brand" href="{% url 'results' %}">Results</a>
+                        <span class="navbar-brand">Hello {{request.user}}</span>
+                        <span><a class="navbar-brand" href="{% url 'logout' %}">Logout</a></span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <br>
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">{{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor%}
+        <!-- Body start-->
+        <div class="conatiner">
+            <div class="que">
+                <div class="f">
+                    <form autocomplete="off" method="post" action="">
+                        {% csrf_token %}
+                        <div class="x">
+                            <label for="username">username </label><br>
+                            <input type="text" name="username" id="username" value="{{request.user}}" readonly /><br>
+                        </div>
+                        <div class="x">
+                            <label for="Sampleid">sample name</label><br>
+                            <input type="text" name="Sampleid" id="Sampleid" required /><br>
+                        </div>
+                        <div class="x">
+                            <label for="Sampledesc">sample decription</label><br>
+                            <input type="text" name="Sampledesc" id="Sampledesc" required />
+                        </div>
+                </div>
+            </div>
+            <div class="que">
+                <div class="fq">
+                    <H2>F1 -ROCK TYPE</H2>
+                    <h5>Type-1 Rock Type</h5>
+                    <input type="radio" name="F1" id="F1_1" value="10" />
+                    <label for="F1_1">Basalt,Quartzite and Massive,Dolomite,LimeStone</label><br>
+                    <input type="radio" name="F1" id="F1_2" value="9" />
+                    <label for="F1_2">Massive Granite</label><br>
+                    <input type="radio" name="F1" id="F1_3" value="8" />
+                    <label for="F1_3">Granite Gnesis and Meta-Volcanic</label><br>
+                    <h5>Type-2 Rock Type</h5>
+                    <input type="radio" name="F1" id="F1_4" value="6 " />
+                    <label for="F1_4">Thickly bedded calcerous rock with intercalations of argillaceous
+                        rocks</label><br>
+                    <input type="radio" name="F1" id="F1_5" value="5" />
+                    <label for="F1_5">Well cemented Terriganeous, Sedimentary rocks mainly sand stone,dominantly
+                        sand
+                        stone
+                        with minor beds of clay or shale rock</label><br>
+                    <input type="radio" name="F1" id="F1_6" value="4" />
+                    <label for="F1_6">Poorly cemented Terriganeous, Sedimentary rocks mainly sand stone,dominantly
+                        sand
+                        stone
+                        with minor beds of clay or shale rock</label><br>
+                    <h5>Type-3 Rock Type</h5>
+                    <input type="radio" name="F1" id="F1_7" value="3.5" />
+                    <label for="F1_7">Foliated Genesiss</label><br>
+                    <input type="radio" name="F1" id="F1_8" value="3" />
+                    <label for="F1_8">Shale and Slate</label><br>
+                    <input type="radio" name="F1" id="F1_9" value="2" />
+                    <label for="F1_9">Slit Stone,mud Stoned and Clay Stone</label><br>
+                    <input type="radio" name="F1" id="F1_10" value="1.5" />
+                    <label for="F1_10">Phylilite</label><br>
+                    <input type="radio" name="F1" id="F1_11" value="1" />
+                    <label for="F1_11">Schist</label><br>
+                    <div class="value_store">
+                        <button type="button" class="btn btn-info" onclick="displayRadioValue(1)">check value for
+                            F1</button>
+                        <input type="text" id="F1_value">
+                    </div>
+                    <!-- <button type="submit" name="F1" class="btn btn-success">Fix value for F1</button> -->
+                </div>
+            </div>
+            <div class="que">
+                <div class="fq">
+                    <H2>F2 - Weathering </H2>
+                    <input type="radio" name="F2" id="F2_1" value="10" />
+                    <label for="F2_1">Fresh Rock No visible sign of weathering indicates fresh rock</label><br>
+                    <input type="radio" name="F2" id="F2_2" value="8" />
+                    <label for="F2_2"> Slightly Weathered Rock, slightly discolored along existing discontinuities
+                        plane,
+                        which may be moderately tight to open in nature or rock with or minor surface staining
+                    </label><br>
+                    <input type="radio" name="F2" id="F2_3" value="6" />
+                    <label for="F2_3"> Moderately Weathered Rock partially discolored along discontinuity planes
+                        indicating
+                        weakening of rock mass, rock structure is slightly altered</label><br>
+                    <input type="radio" name="F2" id="F2_4" value="3" />
+                    <label for="F2_4"> Highly Weathered Rock prominently discolored with remnant isolated patches of
+                        fresh
+                        rock, weathering and alteration prominent along discontinuity planes, considerable
+                        alteration of
+                        rock structure</label><br>
+                    <input type="radio" name="F2" id="F2_5" value="2" />
+                    <label for="F2_5"> Completely Weathered Rock totally discolored, discontinuity planes show
+                        weathering
+                        products, rock structure altered heavily with minor soil formation near surface (Correction
+                        factor C2)</label><br>
+                    <input type="radio" name="F2" id="F2_6" value="1" />
+                    <label for="F2_6"> Residual Rock totally decomposed / disintegrated converted to soil, minor
+                        existence
+                        of initial rock structure</label><br>
+                    <div class="value_store">
+                        <button type="button" class="btn btn-info" onclick="displayRadioValue(2)">check value for
+                            F2</button>
+                        <input type="text" id="F2_value">
+                    </div>
+                </div>
+            </div>
+            <div class="que">
+                <div class="fm">
+                    <H2>F3 - Spacing of Discontinuities</H2>
+                    <input type="radio" name="F3" id="F3_1" value="10" />
+                    <label for="F3_1"> F3 Spacing of Discontinuities >2 m Very rough and un weather wall rock tight
+                        and
+                        discontinuous, no separation</label><br>
+                    <input type="radio" name="F3" id="F3_2" value="8" />
+                    <label for="F3_2"> 2.0 -0.60 m Rough and slightly weathered, wall rock separation < 1 mm. </label>
+                            <br>
+                            <input type="radio" name="F3" id="F3_3" value="5" />
+                            <label for="F3_3"> 0.60 -0.20 m Slightly rough and moderate to highly weathered, wall
+                                rock
+                                separation < 1mm. </label><br>
+                                    <input type="radio" name="F3" id="F3_4" value="3" />
+                                    <label for="F3_4"> 0.20 - 0.06 m Slicken sided wall rock surface or 1-5mm thick
+                                        gauge or 1-5mm wide cont. discon.</label><br>
+                                    <input type="radio" name="F3" id="F3_5" value="1" />
+                                    <label for="F3_5">0.06m 5mm thick soft gauge, 5mm wide continuous
+                                        discontinuity.</label><br>
+                                    <div class="value_store">
+                                        <button type="button" class="btn btn-info" onclick="displayRadioValue(3)">check
+                                            value for
+                                            F3</button>
+                                        <input type="text" id="F3_value">
+                                    </div>
+                </div>
+            </div>
+            <div class="que">
+                <div class="fk">
+                    <H2>F4 - Geological discontinuities / Slope Relationship </H2>
+                    <br>
+                    <br>
+                    <h5>f<sub>1</sub> -Parallelism between the strike of the slope and discontinuities
+                        PLANER - |α<sub>J</sub>-α<sub>S</sub>|
+                        WEDGE - |α<sub>J</sub>-α<sub>S</sub>|
+                        Where, α<sub>J</sub>= Dip direction of joint/intersection line direction
+                        α<sub>S</sub> = Direction of slope inclination
+                    </h5>
+                    <input type="radio" name="F41" id="F4_11" value="4" />
+                    <label for="F4_11">
+                        < 30 <sup>0</sup> Very Favorable
+                    </label><br>
+                    <input type="radio" name="F41" id="F4_21" value="3" />
+                    <label for="F4_21"> II 21<sup>0</sup>-30<sup>0</sup> Favorable</label>
+                    <br>
+                    <input type="radio" name="F41" id="F4_31" value="2" />
+                    <label for="F4_31"> III 11<sup>0</sup>-20<sup>0</sup> Fair </label><br>
+                    <input type="radio" name="F41" id="F4_41" value="1" />
+                    <label for="F4_41"> IV 6<sup>0</sup>-10<sup>0</sup> Unfavorable </label><br>
+                    <input type="radio" name="F41" id="F4_51" value="0" />
+                    <label for="F4_51"> V < 5<sup>0</sup> Very Favorable</label><br>
+                    <div class="value_store">
+                        <button type="button" class="btn btn-info" onclick="displayRadioValue(41)">f <sub>1</sub> value
+                        </button>
+                        <input type="text" id="F41_value">
+                    </div>
+                    <br>
+                    <br>
+                    <h5>
+                        f<sub>2</sub> Inclination relationship of slope and discontinuities
+                    </h5>
+                    <input type="radio" name="F42" id="F4_12" value="4" />
+                    <label for="F4_12">I <-10<sup>0</sup> Very Favorable </label><br>
+                    <input type="radio" name="F42" id="F4_22" value="3" />
+                    <label for="F4_22"> ii 0<sup>0</sup>-(-10<sup>0</sup>) Unfavorable </label>
+                    <br>
+                    <input type="radio" name="F42" id="F4_32" value="2" />
+                    <label for="F4_32"> III 0<sup>0</sup> Fair</label><br>
+                    <input type="radio" name="F42" id="F4_42" value="1" />
+                    <label for="F4_42"> IV 0<sup>0</sup>-10<sup>0</sup> Favorable</label><br>
+                    <input type="radio" name="F42" id="F4_52" value="0" />
+                    <label for="F4_52"> V >10<sup>0</sup> Very Favorable</label><br>
+                    <div class="value_store">
+                        <button type="button" class="btn btn-info" onclick="displayRadioValue(42)"> f <sub>2</sub> value
+                        </button>
+                        <input type="text" id="F42_value">
+                    </div>
+                    <br>
+                    <br>
+                    <h5>
+                        f<sub>3</sub> Inclination of discontinuities
+                    </h5>
+                    <input type="radio" name="F43" id="F4_13" value="0" />
+                    <label for="F4_13">I <= 15<sup>0</sup> Very Favorable </label><br>
+                    <input type="radio" name="F43" id="F4_23" value="1" />
+                    <label for="F4_23"> ii 16<sup>0</sup>-25<sup>0</sup> Unfavorable </label>
+                    <br>
+                    <input type="radio" name="F43" id="F4_33" value="2" />
+                    <label for="F4_33"> III 26<sup>0</sup>-35<sup>0</sup> Fair</label><br>
+                    <input type="radio" name="F43" id="F4_43" value="3" />
+                    <label for="F4_43"> IV 36<sup>0</sup>-45<sup>0</sup> Favorable</label><br>
+                    <input type="radio" name="F43" id="F4_53" value="4" />
+                    <label for="F4_53"> V >45<sup>0</sup> Very Favorable</label><br>
+                    <div class="value_store">
+                        <button type="button" class="btn btn-info" onclick="displayRadioValue(43)">f<sub>3</sub> value
+                        </button>
+                        <input type="text" id="F43_value">
+                    </div>
+                </div>
+                <div class="que">
+                    <div class="fm">
+                        <H2>F5 -Relative Relief and overhang portion </H2>
+                        <input type="radio" name="F5" id="F5_1" value="10" />
+                        <label for="F5_1">
+                            <= 50m Very Low Height </label><br>
+                                <input type="radio" name="F5" id="F5_2" value="8" />
+                                <label for="F5_2">51 – 100m Low Height 8.0</label>
+                                <br>
+                                <input type="radio" name="F5" id="F5_3" value="6" />
+                                <label for="F5_3"> 101 – 200m Medium Hight </label><br>
+                                <input type="radio" name="F5" id="F5_4" value="3" />
+                                <label for="F5_4">201 – 300m High height </label><br>
+                                <input type="radio" name="F5" id="F5_5" value="0" />
+                                <label for="F5_5"> > 300 m Very High Height</label><br>
+                                <div class="value_store">
+                                    <button type="button" class="btn btn-info" onclick="displayRadioValue(5)">check
+                                        value
+                                        for
+                                        F5</button>
+                                    <input type="text" id="F5_value">
+                                </div>
+                    </div>
+                </div>
+                <div class="que">
+                    <div class="fm">
+                        <H2>F6 -Slope inclination</H2>
+                        <input type="radio" name="F6" id="F6_1" value="10" />
+                        <label for="F6_1">
+                            < 15 <sup>0</sup> Rock Slides with probable creep movement
+                        </label><br>
+                        <input type="radio" name="F6" id="F6_2" value="8" />
+                        <label for="F6_2"> 16<sup>0</sup> - 25<sup>0</sup> Rock Slides with probable creep
+                            movement</label>
+                        <br>
+                        <input type="radio" name="F6" id="F6_3" value="6" />
+                        <label for="F6_3"> 26<sup>0</sup> - 35<sup>0</sup> Rock Slides </label><br>
+                        <input type="radio" name="F6" id="F6_4" value="3" />
+                        <label for="F6_4"> 36<sup>0</sup> - 45<sup>0</sup> Rock Slides </label><br>
+                        <input type="radio" name="F6" id="F6_5" value="1" />
+                        <label for="F6_5"> > 45<sup>0</sup>Slides, fall, topples and flows </label><br>
+                        <div class="value_store">
+                            <button type="button" class="btn btn-info" onclick="displayRadioValue(6)">check value for
+                                F6</button>
+                            <input type="text" id="F6_value">
+                        </div>
+                    </div>
+                </div>
+                <div class="que">
+                    <div class="fm">
+                        <H2>F7 -Effect of water filled discontinuities on slope </H2>
+                        <input type="radio" name="F7" id="F7_1" value="10" />
+                        <label for="F7_1">
+                            Zone I
+                        </label><br>
+                        <input type="radio" name="F7" id="F7_2" value="8" />
+                        <label for="F7_2"> Zone II</label>
+                        <br>
+                        <input type="radio" name="F7" id="F7_3" value="5" />
+                        <label for="F7_3"> Zone III</label><br>
+                        <input type="radio" name="F7" id="F7_4" value="3" />
+                        <label for="F7_4">Zone IV </label><br>
+                        <input type="radio" name="F7" id="F7_5" value="1" />
+                        <label for="F7_5">Zone V</label><br>
+                        <div class="value_store">
+                            <button type="button" class="btn btn-info" onclick="displayRadioValue(7)">check value for
+                                F7</button>
+                            <input type="text" id="F7_value">
+                        </div>
+                    </div>
+                </div>
+                <div class="que">
+                    <div class="fm">
+                        <H2>F8 -Land Use and Land Cover </H2>
+                        <input type="radio" name="F8" id="F8_1" value="10" />
+                        <label for="F8_1">
+                            Agricultural Land or Populated Flat Land with slope less than 15
+                        </label><br>
+                        <input type="radio" name="F8" id="F8_2" value="8" />
+                        <label for="F8_2">Thickly forested slope </label>
+                        <br>
+                        <input type="radio" name="F8" id="F8_3" value="5" />
+                        <label for="F8_3">Moderately forested slope </label><br>
+                        <input type="radio" name="F8" id="F8_4" value="2" />
+                        <label for="F8_4">Sparsely forested slope</label><br>
+                        <input type="radio" name="F8" id="F8_5" value="1" />
+                        <label for="F8_5">Barren slope</label><br>
+                        <div class="value_store">
+                            <button type="button" class="btn btn-info" onclick="displayRadioValue(8)">check value for
+                                F8</button>
+                            <input type="text" id="F8_value">
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="que">
+                <div class="k">
+                    <h2>Hydrogeological Conditions</h2>
+                    <input type="radio" name="hc" id="hcy" value="1" />
+                    <label for="hcy">yes </label><br>
+                    <input type="radio" name="hc" id="hcn" value="0" />
+                    <label for="hcn">no</label>
+                    <br>
+                </div>
+            </div> -->
+                <div class="que">
+                    <div class="fm">
+                        <h2>Hydrogeological Conditions</h2>
+                        <input type="radio" name="hc" id="hcy" value="1" />
+                        <label for="hcy">yes </label><br>
+                        <input type="radio" name="hc" id="hcn" value="0" />
+                        <label for="hcn">no</label>
+                        <br>
+                        <H2>Factor 9 (F9)</H2>
+                        <input type="radio" name="F9" id="F9_1" value="10" />
+                        <label for="F9_1">Dry </label><br>
+                        <input type="radio" name="F9" id="F9_2" value="7" />
+                        <label for="F9_2">Damp</label>
+                        <br>
+                        <input type="radio" name="F9" id="F9_3" value="5" />
+                        <label for="F9_3">Wet </label><br>
+                        <input type="radio" name="F9" id="F9_4" value="2" />
+                        <label for="F9_4">Dripping</label><br>
+                        <input type="radio" name="F9" id="F9_5" value="0" />
+                        <label for="F9_5">Flowing </label><br>
+                        <div class="value_store">
+                        </div>
+                    </div>
+                </div>
+                <div class="que">
+                    <div class="fm">
+                        <H2>Factor 10 Excavation Technique</H2>
+                        <input type="radio" name="F10" id="F10_1" value="10" />
+                        <label for="F10_1">Natural Slope</label><br>
+                        <input type="radio" name="F10" id="F10_2" value="7" />
+                        <label for="F10_2">Pre-splitting</label>
+                        <br>
+                        <input type="radio" name="F10" id="F10_3" value="5.5" />
+                        <label for="F10_3">Smooth Blasting </label><br>
+                        <input type="radio" name="F10" id="F10_4" value="0" />
+                        <label for="F10_4">Normal Blasting or Mechanical Excavation</label><br>
+                        <input type="radio" name="F10" id="F10_5" value="-5.0" />
+                        <label for="F10_5">Poor Blasting or deficient blasting</label><br>
+                        <div class="value_store">
+                            <button type="button" class="btn btn-info" onclick="displayRadioValue(10)">check value for
+                                F10</button>
+                            <input type="text" id="F10_value">
+                        </div>
+                    </div>
+                </div>
+                <div class="c">
+                    <div>
+                        <input type="submit" class="btn btn-success btn-large" value="Submit values!" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- body end -->
+        </div>
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h6>About</h6>
+                        <p class="footernotes">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil tenetur,
+                            molestias porro est error fuga iste blanditiis voluptatibus quod! Ex repellendus voluptate
+                            nobis
+                            sapiente dolor alias! Eos enim assumenda neque.</p>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                                <a href="#" id="grp_name">XYZ</a>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h6>Categories</h6>
+                        <ul class="footer-links">
+                            <li><a href="#">mdwp</a></li>
+                            <li><a href="#">vnefivn</a></li>
+                            <li><a href="#">bvfewk</a></li>
+                            <li><a href="#">vwqrvvr</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h6>Quick Links</h6>
+                        <ul class="footer-links">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Contribute</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+            function displayRadioValue(n) {
+                let s = "F" + n;
+                let k = "#" + s + "_value";
+                let ele = document.getElementsByName(s);
+                let t = document.querySelector(k);
+                for (i = 0; i < ele.length; i++) {
+                    if (ele[i].checked)
+                        t.value = ele[i].value
+                }
+            }
+            submitForms = function () {
+                let t = document.querySelector('#Sampleid');
+                let z = document.querySelector("#Sampledesc");
+                if (t.value == '0' || z.value == '#') {
+                    if (t.value == '0') {
+                        alert("fill sample id other than 0");
+                    }
+                    if (z.value == '#') {
+                        alert("fill sample description other than #");
+                    }
+                }
+                else {
+                    let bool = false;
+                    for (let i = 0; i < 10; i++) {
+                        if (i != 3) {
+                            bool = check(i + 1);
+                            console.log(bool);
+                            if (bool === false) {
+                                alert(`check F${i + 1} pls`);
+                                break;
+                            }
+                            else {
+                                let s = "F" + (i + 1);
+                                document.getElementById(s).submit();
+                            }
+                        }
+                    }
+                }
+            }
+            function check(n) {
+                let count = 0;
+                let s = "F" + n;
+                let k = "#" + s + "_value";
+                let ele = document.getElementsByName(s);
+                let t = document.querySelector(k);
+                for (i = 0; i < ele.length; i++) {
+                    if (ele[i].checked)
+                        count++;
+                }
+                if (count === 1)
+                    return true;
+                else
+                    return false;
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

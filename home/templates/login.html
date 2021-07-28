@@ -1,0 +1,50 @@
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/login.css' %}">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="hello">
+        <div class="header">
+            <img class="img1" src="{% static 'img/logo1.jpg' %}" alt="CSIR-CRRI">
+            <h1>Quick Slope Mass Assessment</h1>
+        </div>
+        <br>
+        <div class="login">
+            <img class="img2" src="{% static 'img/1.jpg' %}" alt="sign in">
+            <h2>Login</h2>
+            <form autocomplete="off" method="post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username" required />
+                <input type="password" name="password" placeholder="Password" required />
+                <button type="submit" class="btn btn-primary btn-block btn-large">sign in</button>
+                <h4>OR</h4>
+            </form>
+            <a href="{% url 'register' %}"><button type="submit" class="btn">Register</button></a>
+            <h4>OR</h4>
+            <a href="{% url 'reset_password' %}"><button type="submit" class="btn">Forgot password</button></a>
+        </div>
+    </div>
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">{{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor%}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% endblock %}
