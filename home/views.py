@@ -188,9 +188,3 @@ def results(request):
 @ login_required(login_url='login')
 def table(request):
     return render(request, 'table.html')
-    # if request.method == 'GET':
-    # if request.method == 'POST':
-    #     name = str(request.POST.get('username'))
-    #     sname = str(request.POST.get('sn'))
-    #     qsmar = Qsmart.objects.all().filter(UserName=name).filter(Samplename=sname)
-    #     return render(request, 'test-view', {"qsmar": qsmar})
