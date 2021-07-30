@@ -138,7 +138,7 @@ def base(request):
                               Value_F3=factor_3, Value_F4=factor_4, Value_F5=factor_5, Value_F6=factor_6, Value_F7=factor_7, Value_F8=factor_8, Value_F9=factor_9u, Value_F10=factor_10, QSMAR_rating=rating)
         messages.success(request, 'qsmar rating for ' +
                          id+' '+desc+' is : '+str(rating))
-        return redirect('dashboard')
+        return redirect('results')
 
 
 @ login_required(login_url='login')
